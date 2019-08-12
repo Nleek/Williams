@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>Troubleshooting :: PurpleHelp</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Muli|Raleway|Actor|Roboto:500|Open+Sans:300,400,600" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="css/global.css" rel="stylesheet" />
+    <style>
+        body, html{ /* Body of the document */
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            width: 100%;
+            display: block;
+            overflow: auto;
+        }
+    /* Header Styles */
+        header { /* The header of the site */
+            display: block;
+            width: 100%;
+            height: 90px;
+            background-color: #512698;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index:1;
+        }
+        header ul{
+            margin: 0;
+            float: right;
+            display: inline-block;
+            padding: 0 0px 0 0;
+        }
+        header ul a{
+            display: block;
+            float: left;
+            text-decoration: none;
+        }
+        header ul a:hover{
+            text-decoration: none;
+        }
+        header ul li{
+            font-size: 15px;
+            line-height: 90px;
+            padding-left: 25px;
+            padding-right: 25px;
+            margin-right: 2px;
+            text-transform: uppercase;
+            list-style-type: none;
+            color: #fff;
+        }
+        header ul li:hover{
+            color: #6228a9;
+        }
+        .up_transition:hover span{
+            background-color: #fff !important;
+        }
+        .page_on{
+            background-color: #fff;
+            color: #6228a9;
+        }
+        #logo{
+            float: left;
+            width: 25%;
+        }
+        #logoContainer{
+            width: 300px;
+            height: 90px;
+            padding-top: 5px;
+        }
+        #logo img{
+            width: 200px;
+            margin: 0 auto;
+            display: block;
+        }
+        #mobile-menu{
+            float: right;
+            height: 70px;
+            width: 70px;
+            line-height: 70px;
+            margin-right: 9px;
+            margin-top: 9px;
+            border: 1px solid #ccc;
+            text-align: center;
+            display: none;
+            z-index: 5;
+            position: relative;
+        }
+        #mobile-menu i{
+            line-height: inherit;
+        }
+        #mobile-menu:hover,#mobile-menu:active{
+            background-color: #2b2b2b !important;
+            color: #fff !important;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 740px){
+            header ul{
+                display: none;
+                position: fixed;
+                top:0px;
+                left:0px;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+            }
+            header ul a{
+                height: 25%;
+                width: 100%;
+            }
+            header ul li{
+                width: 100% !important;
+                height: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+                text-align: center;
+                background-color: rgba(72,49,146,0.7);
+                float: none;
+                font-size: 1.2em;
+            }
+            #mobile-menu{
+                display: block;
+            }
+            #logo{
+                display: block;
+                width: calc(100% - 81px);
+            }
+            #logo img{
+                width: 100%;
+                max-width: 200px;
+                margin-left: 20px;
+            }
+        }
+    /*---------------*/
+    /* Side Nav Bar Styles */
+        nav{ /*A container inside the left panel that displays troubleshooting links*/
+            width: calc(25% - 14px);
+            height: calc(100% - 90px);
+            position: fixed;
+            top: 90px;
+            left: 0px;
+            text-align: left;
+            padding-left: 7px;
+            padding-right: 7px;
+            overflow: hidden;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            z-index: 0;
+        }
+        nav h3{ /*This class is for the titles in the sideNav. Hint, they're bigger!*/
+            font-size: 20px;
+            font-family: 'SanFranciscoLight', 'Raleway', sans-serif;
+            text-transform: uppercase;
+            color: #2b2b2b;
+            margin-left: 5%;
+            margin-bottom: 0;
+            padding-bottom: 1em;
+        }
+        nav ul{
+            padding: 0;
+            margin: 0 0 0 10px;
+            display: block;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: calc(100% - 100px);
+        }
+        nav ul li{
+            list-style-type: none;
+            display: inline-block;
+            width: calc(100% - 24px);
+            float: left;
+            color: #4d4d4d;
+            font-family: 'SanFranciscoThin', 'Ek Mukta', sans-serif;
+            font-size: 15px;
+            padding: 7px;
+            margin-top: 4px;
+            text-align: left;
+        }
+        nav ul li:hover{
+            background-color: #2b2b2b;
+            color: #fff;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 960px) and (min-width: 741px){
+            nav{
+                width: 226px;
+            }
+        }
+        @media screen and (max-width: 740px) {
+            nav{
+                width: calc(100% - 14px);
+                display: inline-block;
+                height: auto;
+                max-height: 50%;
+                border-bottom: 1px solid #ccc;
+            }
+            nav h3{
+                margin-bottom: 0;
+                padding-bottom: 1em;
+                margin-left: 0;
+                text-align: center;
+            }
+            nav h3:hover{
+                cursor: pointer;
+            }
+            nav ul{
+                display: none;
+                height: 200px;
+                margin: 0;
+            }
+            nav ul li{
+                padding: 10px 0;
+                text-align: center;
+                width: 100%;
+            }
+        }
+    /*---------------------*/
+        #foot{
+            float: right;
+        }
+    /* Content Styling */
+        main{
+            width: calc(75% - 14px);
+            float: right;
+            margin-top: 90px;
+            background-color: #f1f1f1;
+            padding: 0 7px;
+        }
+        main article{
+            display: block;
+            width: 99%;
+            margin-top: 30px;
+            margin-left: 1%;
+        }
+        main article h2{
+            font-size: 25px;
+            font-family: 'SanFranciscoLight', 'Raleway', sans-serif;
+            text-transform: uppercase;
+            color: #2b2b2b;
+        }
+        main article div{
+            font-size: 17px;
+            margin-top: 30px;
+            font-family: 'SanFranciscoLight','Ek Mukta', sans-serif;
+            color: #4d4d4d;
+            text-transform: none;
+            padding-right: 1%;
+        }
+        @media screen and (max-width: 960px) and (min-width: 741px) {
+            main{
+                width: calc(100% - 254px);
+            }
+        }
+        @media screen and (max-width: 740px){
+            main{
+                float: none;
+                width: calc(100% - 14px);
+                padding-top: 70px;
+                margin-top: 90px;
+            }
+            main article{
+                margin: 0;
+                width: 100%;
+            }
+            main article h2{
+                text-align: center;
+            }
+            main article img{
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    /* Global Styles */
+        a, .link{
+            color: #483192;
+            text-decoration: none;
+            overflow: hidden;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        hr{
+            display: block;
+            margin-top: 3%;
+            width: 100%;
+            background-color: #ccc;
+            border: none;
+            height: 1px;
+        }
+        .bold{
+            color: #000;
+        }
+
+        img {
+            margin-top: 30px;
+            margin-left: 1%;
+        }
+        .transition{
+            -webkit-transition: all 0.15s linear;
+            -moz-transition: all 0.15s linear;
+            -ms-transition: all 0.15s linear;
+            -o-transition: all 0.15s linear;
+            transition: all 0.15s linear;
+        }
+        .up_transition{
+            position: relative;
+            z-index: 10;
+        }
+        .up_transition span{
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            height: 0px;
+            width: 100%;
+            z-index: -1;
+            background-color: transparent;
+        }
+        .up_transition:hover span{
+            height: 100%;
+        }
+    /*---------------*/
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="margin-center" id="logo">
+            <img src="images/purplehelpwhite.png" alt="logo" height="40px" width="200px" />
+        </div>
+        <ul>
+            <a href="index.php"><li class="up_transition transition line-height-center">Home<span class="transition"></span></li></a>
+            <a href="troubleshooting.html"><li class="up_transition transition line-height-center page_on">Troubleshooting<span class="transition"></span></li></a>
+            <a id="contact-link" href="#contact"><li class="up_transition transition line-height-center">Contact<span class="transition"></span></li></a>
+        </ul>
+        <div id="mobile-menu" class="transition" data-state="closed">
+            <i class="material-icons">dehaze</i>
+        </div>
+    </header>
+    <nav>
+        <h3 data-state="open">Troubleshooting Links</h3>
+        <ul>
+            <li class="transition">Updating Wireless Drivers</li>
+            <li class="transition">Correct Login Information</li>
+            <li class="transition">Removing the Purple Air, Eduroam or Williams Guest Network</li>
+            <li class="transition">Disable Power Saving Mode for the Wireless Card</li>
+            <li class="transition">Radio hardware and software switches</li>
+            <li class="transition">Disable IPv6</li>
+            <li class="transition">Waking Device from "Sleep" Mode</li>
+            <li class="transition">Wireless Speed Tests</li>
+            <li class="transition">Reporting A Problem to OIT</li>
+            <li class="transition">How to Gather Specific Information (SSID, MAC addresses)</li>
+            <li class="transition">Running the Williams Wifi Information Scripts</li>
+        </ul>
+    </nav>
+    <main>
+        <!--New Item Structure.-->
+        <article>
+            <h2>Updating Wireless Drivers</h2>
+            <div>
+                <p>This is important especially for computers that have Intel wireless cards. Legacy Intel drivers do not function well with the wireless infrastructure installed at Williams. Each computer has a Network Interface Card (NIC) that allows your computer to connect to the network or the Internet. Most laptops have one card for wired access and another card for wireless access. A driver program controls how the card operates. As a manufacturer makes improvements to their NIC's, they send out a new driver for you to load. The Williams wireless network uses modern features, and you may need to update your driver to have the best experience. Sometimes a brand new computer will have a driver a few years old.</p>
+                <p>If you have a computer running the Windows operating system, please check to see if you have Intel Wireless drivers. This can be found by going to:</p>
+                <ul>
+                    <li><span class="bold">Control Panel > System > Hardware > Device Manager</span></li>
+                    <li>You can search for Device Manager in the control panel of Windows Vista and Windows 7</li>
+                    <li>If you have an Intel wireless card, please update the drivers by going to: <a class="link" href="http://www.intel.com/support/wireless/wlan/sb/cs-010623.htm" target="_blank">http://www.intel.com/support/wireless/wlan/sb/cs-010623.htm</a></li>
+                </ul>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Correct Login Information</h2>
+            <div>
+                <p>Williams wireless uses your username to log in. For example, username: "jms4" and then your email password. If you cannot login to your email account, then you may not be able to login to Williams wireless. You may need to change your password. <a href="https://pchanger.williams.edu/IDM/jsps/login/Login.jsp">You can click here</a> to go to the Williams Password Changer.</p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Removing the Purple Air, Eduroam or Williams Guest Network</h2>
+            <div>
+                <p>If a password or setting is wrong and is stored in one of your wireless profiles, it may be preventing you from connecting. (Ask Todd)</p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Disable Power Saving Mode for the Wireless Card</h2>
+            <div>
+                <p>Some operating system/computer combinations are capable of throttling the power delivered to a wireless card when it is either not heavily used or when the computer is in sleep mode. This can cause some connection problems or result is slower connectivity. If you're having trouble with the wireless network, please try to disable this feature.</p>
+                <ol>
+                    <li>Right-click on <span class="bold">My Computer</span> (Vista/Win7) and choose <span class="bold">Properties</span></li>
+                    <li>On the System Properties window, click the <span class="bold">Hardware</span> tab, then the <span class="bold">Device Manager</span> link (Vista/Win7).</li>
+                    <li>Find your wireless network adapter in the list under <span class="bold">Network Adapters.</span></li>
+                    <li>Right-click on the wireless adapter and choose  <span class="bold">Properties</span>.</li>
+                    <li>Select the <span class="bold">Advanced</span> tab and choose <span class="bold">Transmit Power</span> in the Property box.</li>
+                    <li>Choose <span class="bold">5. highest</span> from the drop-down box for maximum performance</li>
+                    <li>Select the <span class="bold">Power Management</span> tab and make sure there is <span class="bold">NO</span> check in the box for <span class="bold">Allow the computer to turn off this device to save power</span>, then click <span class="bold">OK.</span></li>
+                    <li>Turn off your wireless transmitter and turn it back on for the change to take effect. On some machines, this can be done by a physical switch on the laptop. On others, it can be done by a combination of keyboard keys. Restarting your computer is generally not necessary, but if you are unsure of how to reset the wireless adapter, you can reboot the computer to make the change take effect.</li>
+                </ol>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Radio Hardware and Software Switches</h2>
+            <div>
+                <p>Each wireless card and computer manufacturer have a different way of disabling the radio or wireless card antenna. If you are receiving very little or no signal strength from the Williams wireless networks, please be sure that your radio is on. For PCs, first look for a hardware switch on your device. Some devices implement a hardware switch using the "Fn" key. Hold down "Fn" and press the key with a radio tower. You should get a message telling you if you have just turned WiFi on or off. Refer your laptop manual for more information. For Macs, on the top bar of your screen there is a signal icon. If you click it, it should say Wifi is on.</p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Disable IPv6</h2>
+            <div>
+                <p>Williams OIT is noticing that some computers are erroneously advertising IPv6 services to others on the wireless networks. This can be caused by a computer having Internet Connection Sharing enabled. When this is the case, users affected by these advertisements are unable to get to some web sites and network services.</p>
+                <ol>
+                    <li>Open the <span class="bold">Network and Sharing Center</span></li>
+                    <span>You can do this by first clicking the Windows icon in the lower left hand corner, then typing "Network and Sharing Center" into the search box at the bottom and selecting it from the list.</span>
+                    <li>Click on <span class="bold">Change Adapter Settings</span> on the left hand side</li>
+                    <li>Right click on your wireless adapter and click <span class="bold">Properties</span></li>
+                    <li><span class="bold">Uncheck</span> Internet Protocol Version 6 (TCP/IPv6)</li>
+                </ol>
+                <p>Tip: Microsoft has a "Fix-it" tool that will do this for you. Please see: <a href="http://support.microsoft.com/kb/9298">http://support.microsoft.com/kb/9298</a></p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Waking Device from "Sleep" Mode</h2>
+            <div>
+                <p><span class="bold">Issue:</span> If you use wireless in one location, put your laptop/device into "Sleep" mode, and move to another location, you may experience difficulty connecting to wireless in the new location. The reason for this is that the device "remembers" the previous location and tries to restore it. Since that location is now out of range, the connection fails. Certain Macbooks appear particularly prone to this behavior.</p>
+                <p><span class="bold">Solution:</span> The fastest way to restore connectivity is to connect to a different Williams wireless network other than the one you were previously on. This will force your computer to connect from the new location. You should now be able to reconnect to the Williams network.</p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Wireless Speed Tests</h2>
+            <div>
+                <p>When troubleshooting slow Internet connections, it is useful to gather speed test information, as this helps to tell where the Internet speed bottleneck issues are. NOTE: Both speed tests below require flash to be installed on the device. iOS devices do not support flash.</p>
+                <p><span class="bold">Local Speed Test</span></p>
+                <ol>
+                    <li>Go to <a href="http://speedtest.williams.edu/" target="_blank">speedtest.williams.edu</a></li>
+                    <li>Click on <span class="bold">Begin Test</span></li>
+                    <li>Wait for the test to complete</li>
+                    <li>Write down or tell the Williams Helpdesk employee the upload and download speeds</li>
+                    <li>Click the <span class="bold">refresh</span> on your browser, run the local speed test twice more, and note the upload and download speeds</li>
+                </ol>
+                <p><span class="bold">Off-Campus Speed Test</span></p>
+                <ol>
+                    <li>Go to <a href="http://www.speedtest.net/" target="_blank">http://www.speedtest.net/</a></li>
+                    <li>Click on <span class="bold">Begin Test</span></li>
+                    <li>Wait for the test to complete</li>
+                    <li>Write down or tell the Williams Helpdesk employee the upload and download speeds, and the location (located in the lower right)</li>
+                    <li>Click the <span class="bold">Test Again</span> button, run the speed test twice more, and note the upload and download speeds</li>
+                </ol>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Reporting A Problem to OIT</h2>
+            <div>
+                <p>Williams IT is committed to resolving problems and concerns that are reported on the wireless network. Since there can be many different types of problems on the wireless network, Williams IT needs some additional information to help resolve them and determine if there are any trends. You can go to the homepage and fill out the questioner; here are some general questions we need to know.</p>
+                <p>Overview of troubleshooting steps and Information requested:</p>
+                <ul>
+                    <li>Provide your name and contact information</li>
+                    <li>Update wireless drivers</li>
+                    <li>Provide the building name and room number where you are located</li>
+                    <li>Provide your MAC address, SSID (network name) - all included in Windows Vista/7 and Mac OS X UofL script (below)</li>
+                    <li>Provide the date and time the problem occurred</li>
+                </ul>
+                <p>Description of the Problem (Examples)</p>
+                <ul>
+                    <li>The connection is slow, intermittent or never connects?</li>
+                    <li>"I can get connected in some places but not in others"</li>
+                    <li>"The signal strength indicator is showing low"</li>
+                    <li>Any other details you can think of</li>
+                </ul>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>How to Gather Specific Information (SSID, MAC addresses)</h2>
+            <div>
+                <p>Williams Wifi Information gathering script:</p>
+                <p>
+                    This application is intended to make data collection easier while working with Williams OIT personnel to troubleshoot wired or wireless network problems. The script will run a few commands for Windows Vista/7/8/10 or Mac OS X and put a diagnostic file on your desktop.  You can email this document to either stchelp@williams.edu or desktop@williams.edu.
+                </p>
+            </div>
+        </article>
+        <hr />
+        <article>
+            <h2>Running the Williams Wifi Information Scripts</h2>
+            <div>
+                <p><span class="bold">Windows 10/8/7/Vista:</span></p>
+                <ol>
+                    <li>Download the following file to your computer running Windows: (insert Williams file)</li>
+                    <li>Double click on the file (instert Williams file) to extract the file.</li>
+                    <li>Double click on (insert Williams file) file.</li>
+                    <li>When the application completes, it will put a file on your Desktop called Williams Wireless Network Information_*datestamp*.txt</li>
+                    <li>Go to (Currently non-existent page) and create an incident in ServiceNow.</li>
+                </ol>
+            </div>
+        </article>
+        <hr />
+    </main>
+    <a id="contact"></a>
+    <div id="foot" class="parallax_container">
+        <footer id="parallax-foot">
+            <div class="helpBox">
+                <div class="helpHeaders">Student Help</div>
+                <div class="helpContent iconBox"><img class="icon" src="images/phoneicon.png" alt="phone">(413) 597-3088</div>
+                <div class="helpContent iconBox"><img class="icon" src="images/emailicon.png" alt="email">stchelp@williams.edu</div>
+                <div class="helpContent">Sawyer Library, 2nd Floor</div>
+            </div>
+            <div class="helpBox">
+                <div class="helpHeaders">Faculty Help</div>
+                <div class="helpContent iconBox"><img class="icon" src="images/phoneicon.png" alt="phone">(413) 597-4090</div>
+                <div class="helpContent iconBox"><img class="icon" src="images/emailicon.png" alt="email">desktop@williams.edu</div>
+                <div class="helpContent">Jesup Hall, Room 303</div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/global.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("nav h3").click(function(){
+
+                var title = $(this);
+                var state = title.data("state");
+                var links = $("nav ul");
+                if(width <= 740){
+
+                    if(state == "closed"){
+                        links.slideDown(300);
+                        title.data("state","open");
+                        title.css({'border-bottom':'1px solid #ccc'});
+                    }
+                    else{
+                        links.slideUp(300);
+                        title.data("state","closed");
+                        title.css({'border-bottom':''});
+                    }
+
+                }
+                else{
+                    links.css({'display':'block'});
+                }
+
+            });
+
+            $("nav ul li").click(function(){
+
+                var to_elem_title = $(this).html().toLowerCase();
+
+                $("article").each(function(){
+
+                    var title = $(this).find("h2").html().toLowerCase();
+                    if(title == to_elem_title){
+                        var modifier = 0;
+                        if(width <= 740){
+                            modifier = 170;
+                        }
+                        else{
+                            modifier = 100;
+                        }
+                        var to_elem = $(this);
+                        var offset = to_elem.offset().top;
+                        offset -= modifier;
+                        $('html, body').stop().animate({'scrollTop': offset+"px"}, 700);
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+</body>
+</html>
